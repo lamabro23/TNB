@@ -58,8 +58,18 @@ public class LocalAMQBroker extends AMQBroker implements Deployable, WithDockerI
     }
 
     @Override
-    protected String mqttUrl() {
+    public String mqttUrl() {
         return String.format("tcp://%s:%d", brokerUrl(), getPortMapping(1883));
+    }
+
+    @Override
+    protected String mqttClientUrl() {
+        return mqttUrl();
+    }
+
+    @Override
+    public String amqpUrl() {
+        return String.format("amqp://%s:%d", brokerUrl(), getPortMapping(5672));
     }
 
     @Override
@@ -68,7 +78,7 @@ public class LocalAMQBroker extends AMQBroker implements Deployable, WithDockerI
     }
 
     private int[] containerPorts() {
-        return new int[] {8161, 61616, 1883};
+        return new int[] {8161, 61616, 1883, 5672};
     }
 
     private Map<String, String> containerEnvironment() {

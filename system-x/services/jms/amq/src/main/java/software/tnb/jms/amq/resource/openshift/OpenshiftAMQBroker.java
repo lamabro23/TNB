@@ -127,8 +127,18 @@ public class OpenshiftAMQBroker extends AMQBroker implements OpenshiftDeployable
     }
 
     @Override
-    protected String mqttUrl() {
+    public String mqttUrl() {
+        return "tcp://" + brokerUrl() + ":61626";
+    }
+
+    @Override
+    protected String mqttClientUrl() {
         return String.format("ssl://%s:443", externalHostname());
+    }
+
+    @Override
+    public String amqpUrl() {
+        return "amqp://" + brokerUrl() + ":61626";
     }
 
     @Override
