@@ -17,6 +17,7 @@ import software.tnb.horreum.validation.generated.auth.ApiKeyAuth;
 import software.tnb.horreum.validation.generated.auth.Authentication;
 import software.tnb.horreum.validation.generated.auth.HttpBasicAuth;
 
+import org.slf4j.LoggerFactory;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -1140,6 +1141,10 @@ public class ApiClient {
         allQueryParams.addAll(collectionQueryParams);
 
         final String url = buildUrl(baseUrl, path, queryParams, collectionQueryParams);
+        LoggerFactory.getLogger(ApiClient.class).warn(
+                "baseUrl: {},\npath: {},\nmethod: {},\nqueryParams: {},\n collectionQueryParams: {},\nbody: {},\nheaderParams: {},\ncookieParams: {},\nformParams: {},\nauthNames: {},\ncallback: {}", 
+                baseUrl, path, method, queryParams, collectionQueryParams, body, headerParams, cookieParams, formParams, authNames, callback);
+        LoggerFactory.getLogger(ApiClient.class).warn("url: {}", url);
 
         // prepare HTTP request body
         RequestBody reqBody;

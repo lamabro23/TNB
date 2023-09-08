@@ -75,10 +75,13 @@ import software.tnb.horreum.validation.generated.model.Variable;
 import software.tnb.horreum.validation.generated.model.View;
 import software.tnb.horreum.validation.generated.model.Watch;
 
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7362,10 +7365,13 @@ public class DefaultApi {
 
         // Determine Base Path to Use
         if (localCustomBaseUrl != null) {
+            LoggerFactory.getLogger(DefaultApi.class).debug("Using Custom Base Path: {}", localCustomBaseUrl);
             basePath = localCustomBaseUrl;
         } else if (localBasePaths.length > 0) {
+            LoggerFactory.getLogger(DefaultApi.class).debug("Using Local Base Path: {}", Arrays.toString(localBasePaths));
             basePath = localBasePaths[localHostIndex];
         } else {
+            LoggerFactory.getLogger(DefaultApi.class).error("No Base Path defined!");
             basePath = null;
         }
 

@@ -52,6 +52,8 @@ public class HorreumValidation implements Validation {
 
     public Integer postRunData(String description, String owner, String schema, String start, String stop, String testName,
         String access, Object data) throws Exception {
+        LOG.warn("start: {},\nstop: {},\ntestName: {},\ndata: {},\n access: {},\ndescription: {},\nowner: {},\nschema: {}\ntoken: {}",
+                start, stop, testName, data, access, description, owner, schema, horreumAccount.token(testName));
         String runDataIdAsString =
             defaultApi.runServiceAddRunFromDataWithHttpInfo(start, stop, testName, data, Access.fromValue(access), description, owner, schema,
                 horreumAccount.token(testName)).getData();
