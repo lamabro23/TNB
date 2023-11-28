@@ -91,6 +91,7 @@ public class PrometheusMetricsValidation implements Validation {
         Response response = client.get(
             String.format("%s/api/v1/query_range?query=%s&start=%d&end=%d&step=%d", url, query, start, end, step),
             Map.of("Authorization", "Bearer " + token));
+        System.out.println(response.getBody());
         JsonObject json = JsonParser.parseString(response.getBody()).getAsJsonObject();
         if (!json.get("status").getAsString().equalsIgnoreCase("success")) {
             throw new IllegalStateException("The metric query failed");
