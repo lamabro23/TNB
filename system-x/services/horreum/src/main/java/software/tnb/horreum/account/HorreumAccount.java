@@ -3,6 +3,8 @@ package software.tnb.horreum.account;
 import software.tnb.common.account.Account;
 import software.tnb.common.account.WithId;
 
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 
 public class HorreumAccount implements Account, WithId {
@@ -16,6 +18,17 @@ public class HorreumAccount implements Account, WithId {
 
     private HorreumDataSetAccount getTest(String testName) {
         HorreumDataSetAccount account = tests.get(testName);
+        LoggerFactory.getLogger(HorreumAccount.class).warn("About to print tests:");
+        for (Map.Entry<String, HorreumDataSetAccount> entry : tests.entrySet()) {
+            if (entry.getValue() == null) {
+                LoggerFactory.getLogger(HorreumAccount.class).info(entry.getKey() + " -> null");
+            } else {
+                LoggerFactory.getLogger(HorreumAccount.class)
+                        .info(entry.getKey() + " -> " + entry.getValue().token() + " -> "
+                                + entry.getValue().username() + " -> " + entry.getValue().password() + " -> "
+                                + entry.getValue().testName());
+            }
+        }
         if (account == null) {
             throw new IllegalArgumentException("Unknown test " + testName);
         }
